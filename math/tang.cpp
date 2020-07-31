@@ -20,9 +20,8 @@ int main() {
 		image.at<uchar>(image.rows / 2, i) = 255;
 	}
 	for (int i = 0; i < image.cols; i++) {
-		//std::cout << sin(i / 30) * 100 << std::endl;
 		if (i % (image.cols / 2) != 0) {
-			Y = image.rows / 2 + cos((-(image.cols / 2) + (float)i) / 50) / sin((-(image.cols / 2) + (float)i) / 50) * 100;
+			Y = image.rows / 2 - sin(((float)i - (image.cols / 2)) / 100) / cos(((float)i - (image.cols / 2)) / 100) * 100;
 			if ((Y < image.rows) && (Y >= 0)) {
 				image.at<uchar>(Y, i) = 255;
 			}
