@@ -4,14 +4,17 @@
 #include <fstream>
 #include <Windows.h>
 #include <time.h>
+#include <codecvt>
+#include "text_function.h"
 
 int main() {
 	//setlocale(LC_ALL, "RUS");
 	std::string ClipboardText[2];
 	//char* ClipboardText[2];
 	char last[2] = { 0, 0 };
-	std::string AppDataPath = getenv("APPDATA");
 	int ClipboardTime = NULL;
+
+	std::string AppDataPath = Dir();
 
 	for (;;) {
 
